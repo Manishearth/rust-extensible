@@ -21,6 +21,7 @@ pub fn plugin_registrar(reg: &mut Registry) {
 }
 
 #[allow(missing_copy_implementations)]
+/// A lint pass which catches uses of extensible enums in matches lacking wildcards
 pub struct ExtensiblePass;
 
 
