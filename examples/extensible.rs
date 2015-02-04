@@ -12,12 +12,15 @@ pub use Foo::*;
 
 fn main() {
     let x = Bar;
+    // This should not compile
     let mut out = match x {
         Bar => 1u8,
         Baz(y) => y,
         Quux => 0u8, 
     };
     println!("{}", out);
+
+    // This is fine
     out = match x {
         Bar => 1u8,
         Baz(y) => y,
