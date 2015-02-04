@@ -1,0 +1,9 @@
+[package]
+
+name = "extensible"
+version = "0.0.1"
+authors = ["Manish Goregaokar <manishsmail@gmail.com>"]
+
+[lib]
+name = "extensible"
+crate_type = ["dylib"]
