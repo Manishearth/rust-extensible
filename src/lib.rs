@@ -1,6 +1,6 @@
 #![feature(plugin_registrar, box_syntax)]
 
-#![feature(core, rustc_private)]
+#![feature(rustc_private)]
 
 #[macro_use]
 extern crate syntax;
@@ -58,11 +58,11 @@ impl LintPass for ExtensiblePass {
                 }
             }
             // else, error
-            cx.span_lint(EXTENSIBLE_ENUM, expr.span, format!("The enum {} is marked as extensible, \
+            cx.span_lint(EXTENSIBLE_ENUM, expr.span, &format!("The enum {} is marked as extensible, \
                                                               and may increase in size in the future. \
                                                               Please add a wildcard arm to \
                                                               this match statement",
-                                                              e_ty.repr(cx.tcx)).as_slice())
+                                                              e_ty.repr(cx.tcx))[..])
         }
     }
 }

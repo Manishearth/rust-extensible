@@ -1,7 +1,7 @@
-#![feature(plugin)]
-#![allow(dead_code, unused_attributes)]
-#[plugin] extern crate extensible;
+#![feature(plugin, custom_attribute)]
+#![plugin(extensible)]
 
+#![allow(dead_code, unused_attributes)]
 #[extensible]
 enum Foo {
     Bar,
@@ -12,8 +12,7 @@ pub use Foo::*;
 
 fn main() {
     let x = Bar;
-    // This should not compile
-    let mut out = match x {
+    let mut out = match x { //~ ERROR The enum Foo is marked as extensible
         Bar => 1u8,
         Baz(y) => y,
         Quux => 0u8, 

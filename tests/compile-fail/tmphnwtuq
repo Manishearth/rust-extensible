@@ -1,0 +1,11 @@
+#![feature(plugin, custom_attribute)]
+#![plugin(extensible)]
+
+
+fn main() {
+    let x = Foo;
+    bar(FooBar::Foo(x)); //~ ERROR #[no_move] type `Foo` moved
+}
+
+#[extensible]
+e

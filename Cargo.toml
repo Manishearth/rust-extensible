@@ -4,6 +4,15 @@ name = "extensible"
 version = "0.0.1"
 authors = ["Manish Goregaokar <manishsmail@gmail.com>"]
 
+description = "A plugin to prevent exhaustive matches from being used on enums marked as 'extensible'"
+repository = "https://github.com/Manishearth/rust-extensible"
+readme = "README.md"
+license = "MPL-2.0"
+keywords = ["extensible", "enum", "plugin"]
+
 [lib]
 name = "extensible"
-crate_type = ["dylib"]
+plugin = true
+
+[dev-dependencies]
+compiletest_rs = "*"
