@@ -13,7 +13,6 @@ use rustc::lint::LintPassObject;
 use syntax::ast;
 use rustc::lint::{Context, LintPass, LintArray};
 use rustc::middle::ty;
-use rustc::util::ppaux::Repr;
 
 #[plugin_registrar]
 pub fn plugin_registrar(reg: &mut Registry) {
@@ -36,10 +35,10 @@ impl LintPass for ExtensiblePass {
     fn check_expr(&mut self, cx: &Context, expr: &ast::Expr) {
         // If it's a normal match ...
         if let ast::ExprMatch(ref ex, ref arms, ast::MatchSource::Normal) = expr.node {
-            let e_ty = ty::expr_ty(cx.tcx, &*ex);
+            let e_ty = cx.tcx.expr_ty(&*ex);
             // ... on an enum type with #[extensible] ...
             match  e_ty.sty {
-                ty::ty_enum(did, _) if ty::has_attr(cx.tcx, did, "extensible") => (),
+                ty::TyEnum(did, _) if cx.tcx.has_attr(did, "extensible") => (),
                 _ => return
             }
             // ... which has at least one arm ..
@@ -62,7 +61,7 @@ impl LintPass for ExtensiblePass {
                                                               and may increase in size in the future. \
                                                               Please add a wildcard arm to \
                                                               this match statement",
-                                                              e_ty.repr(cx.tcx))[..])
+                                                              e_ty)[..])
         }
     }
 }
